@@ -1,47 +1,6 @@
 import math 
-from secret_sharing.polynomial import Polynomial 
 
 from matplotlib import pyplot as plt
-
-from pprint import pprint
-
-zero = Polynomial([])
-
-f = Polynomial([10, 1, 2, 3]) 
-g = Polynomial([-8, 17, 0, 5]) 
-
-def interpolate(points):
-    """Return the unique degree n polynomial passing througn the given n + 1 points"""
-    if len(points) == 0:
-        raise ValueError('nope')
-
-    x_values = [p[0] for p in points]
-    if len(set(x_values)) < len(x_values):
-        raise ValueError('none unique x-values present in the x_values')
-
-    terms = [single_term(points, i) for i in range(0, len(points))] 
-    return sum(terms, zero)
-
-
-def single_term(points, i):
-    """Return one point of an interpolated polinomial"""
-
-    theTerm = Polynomial([1.])
-    xi, yi = points[i] 
-
-    for j, p in enumerate(points):
-        if j == i:
-            continue 
-        xj = p[0] 
-        theTerm = theTerm * Polynomial(
-            [-xj / (xi - xj), 1.0 / (xi - xj)]
-        )
-        print('xi: {}'.format(xi))
-        print('xj: {}'.format(xj))
-        print('term: {}'.format(theTerm))
-
-    return theTerm * Polynomial([yi]) 
-
 
 
 # 
